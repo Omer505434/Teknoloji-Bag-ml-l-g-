@@ -1,0 +1,3091 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teknoloji Bağımlılığı - Detaylı Rehber</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --dark-bg: #0a0e27;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.3);
+            --shadow-xl: 0 30px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        body {
+            font-family: 'Inter', 'Poppins', sans-serif;
+            background: var(--dark-bg);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(102, 126, 234, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(118, 75, 162, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(79, 172, 254, 0.15) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(245, 87, 108, 0.15) 0px, transparent 50%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 0;
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-icon-wrapper {
+            width: 45px;
+            height: 45px;
+            background: var(--primary-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-lg);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--text-primary);
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-primary);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 8rem 2rem 4rem;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .shape-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--primary-gradient);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--secondary-gradient);
+            top: 60%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+
+        .shape-3 {
+            width: 350px;
+            height: 350px;
+            background: var(--accent-gradient);
+            bottom: 10%;
+            left: 50%;
+            animation-delay: 10s;
+        }
+
+        .shape-4 {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            top: 30%;
+            right: 30%;
+            animation-delay: 15s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text {
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            animation: slideInLeft 1s ease;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .gradient-text {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-secondary {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .hero-features {
+            display: flex;
+            gap: 2rem;
+            animation: fadeInUp 1s ease 0.8s both;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .feature-item i {
+            color: #4facfe;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            animation: fadeInUp 1s ease 1s both;
+        }
+
+        .stat-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .stat-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-unit {
+            font-size: 1.5rem;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        .scroll-arrow {
+            width: 2px;
+            height: 30px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+        }
+
+        /* Sections */
+        .section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .section-alt {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.25rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        /* Cards */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .content-card {
+            text-align: center;
+        }
+
+        .card-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: var(--primary-gradient);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .content-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .content-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Types Grid */
+        .types-section {
+            margin-top: 4rem;
+        }
+
+        .subsection-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .type-card {
+            text-align: center;
+        }
+
+        .type-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .type-card h4 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .type-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Symptoms */
+        .symptoms-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .symptom-category {
+            padding: 2.5rem;
+        }
+
+        .symptom-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .symptom-icon-wrapper {
+            width: 60px;
+            height: 60px;
+            background: var(--secondary-gradient);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .symptom-category h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .symptom-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .symptom-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .symptom-check {
+            color: #4facfe;
+            margin-top: 0.25rem;
+            flex-shrink: 0;
+        }
+
+        .symptom-item p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Effects Tabs */
+        .effects-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 1rem 2rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .tab-btn:hover,
+        .tab-btn.active {
+            background: var(--primary-gradient);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .effects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .effect-category {
+            padding: 2rem;
+        }
+
+        .effect-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .effect-category h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .effect-category ul {
+            list-style: none;
+        }
+
+        .effect-category li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .effect-category li i {
+            color: #4facfe;
+            margin-top: 0.5rem;
+            font-size: 0.5rem;
+        }
+
+        /* Solutions */
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .solution-card {
+            padding: 2.5rem;
+        }
+
+        .solution-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .solution-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .solution-card ul {
+            list-style: none;
+        }
+
+        .solution-card li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .solution-card li i {
+            color: #4facfe;
+            margin-top: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .professional-help {
+            margin-top: 4rem;
+        }
+
+        .help-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .help-card {
+            text-align: center;
+            padding: 2.5rem;
+        }
+
+        .help-card i {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .help-card h4 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .help-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Test Section */
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem;
+        }
+
+        .test-question {
+            text-align: center;
+        }
+
+        .test-icon {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .test-question h3 {
+            font-size: 1.75rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .test-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .option-btn {
+            padding: 1.25rem 2rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .option-btn:hover {
+            background: var(--primary-gradient);
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .test-progress {
+            width: 100%;
+            height: 8px;
+            background: var(--glass-bg);
+            border-radius: 10px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--primary-gradient);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .test-result {
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .result-icon {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .test-result h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .test-result p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        /* Prevention */
+        .prevention-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .prevention-card {
+            padding: 2.5rem;
+        }
+
+        .prevention-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .prevention-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .prevention-card ul {
+            list-style: none;
+        }
+
+        .prevention-card li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .prevention-card li i {
+            color: #4facfe;
+            margin-top: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        /* Resources */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .resource-card {
+            padding: 2.5rem;
+        }
+
+        .resource-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .resource-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .resource-card ul {
+            list-style: none;
+        }
+
+        .resource-card li {
+            padding: 0.75rem 0;
+            color: var(--text-secondary);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .resource-card li:last-child {
+            border-bottom: none;
+        }
+
+        .resource-card li strong {
+            color: var(--text-primary);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--glass-border);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo i {
+            font-size: 2rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-logo h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .footer-section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-note {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: rgba(10, 14, 39, 0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 2rem;
+                transition: left 0.3s ease;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .content-grid,
+            .types-grid,
+            .solutions-grid,
+            .effects-grid,
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                padding-left: 3rem !important;
+                padding-right: 0 !important;
+                text-align: left !important;
+            }
+
+            .timeline-item .timeline-dot {
+                left: 9px !important;
+                right: auto !important;
+            }
+
+            .slider-arrow {
+                width: 40px;
+                height: 40px;
+            }
+
+            .slider-arrow.prev {
+                left: 1rem;
+            }
+
+            .slider-arrow.next {
+                right: 1rem;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Selection */
+        ::selection {
+            background: rgba(102, 126, 234, 0.3);
+            color: var(--text-primary);
+        }
+
+        /* Hero Slider */
+        .hero-slider {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .slide-content {
+            text-align: center;
+            z-index: 2;
+            position: relative;
+            padding: 2rem;
+        }
+
+        .slider-nav {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 10;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slider-dot.active {
+            background: var(--text-primary);
+            width: 30px;
+            border-radius: 6px;
+        }
+
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .slider-arrow:hover {
+            background: var(--primary-gradient);
+            border-color: transparent;
+        }
+
+        .slider-arrow.prev {
+            left: 2rem;
+        }
+
+        .slider-arrow.next {
+            right: 2rem;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 2rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-overlay p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Success Stories */
+        .stories-slider {
+            position: relative;
+            margin-top: 3rem;
+            overflow: hidden;
+        }
+
+        .stories-container {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .story-card {
+            min-width: 100%;
+            padding: 0 1rem;
+            box-sizing: border-box;
+        }
+
+        .story-content {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .story-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .story-quote {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .story-author {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .story-role {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .story-rating {
+            margin-top: 1.5rem;
+            color: #ffd700;
+            font-size: 1.5rem;
+        }
+
+        /* FAQ */
+        .faq-container {
+            max-width: 900px;
+            margin: 3rem auto 0;
+        }
+
+        .faq-item {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active {
+            border-color: rgba(102, 126, 234, 0.5);
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+            font-size: 1.25rem;
+            color: var(--primary-gradient);
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 2rem;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 2rem 1.5rem;
+        }
+
+        .faq-answer p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 3rem auto 0;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--glass-border);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
+            width: 50%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 3rem;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 3rem;
+            text-align: left;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            border: 4px solid var(--dark-bg);
+            top: 0;
+            z-index: 2;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -11px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -11px;
+        }
+
+        .timeline-content {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .timeline-date {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Stats Slider */
+        .stats-slider {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            padding: 2rem 0;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+        }
+
+        .stats-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .stat-slide {
+            min-width: 300px;
+            scroll-snap-align: start;
+        }
+
+        /* Video Section */
+        .video-container {
+            position: relative;
+            max-width: 900px;
+            margin: 3rem auto 0;
+            border-radius: 20px;
+            overflow: hidden;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-wrapper iframe,
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-gradient);
+            cursor: pointer;
+        }
+
+        .play-button {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--dark-bg);
+            transition: all 0.3s ease;
+        }
+
+        .video-placeholder:hover .play-button {
+            transform: scale(1.1);
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon-wrapper">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <span class="logo-text">Teknoloji Bağımlılığı</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#anasayfa" class="active">Ana Sayfa</a></li>
+                <li><a href="#nedir">Nedir?</a></li>
+                <li><a href="#belirtiler">Belirtiler</a></li>
+                <li><a href="#etkiler">Etkiler</a></li>
+                <li><a href="#cozumler">Çözümler</a></li>
+                <li><a href="#galeri">Galeri</a></li>
+                <li><a href="#hikayeler">Hikayeler</a></li>
+                <li><a href="#test">Test</a></li>
+                <li><a href="#sss">SSS</a></li>
+                <li><a href="#kaynaklar">Kaynaklar</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="anasayfa" class="hero">
+        <div class="hero-background">
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+            </div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-badge">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Dijital Çağın Farkındalığı</span>
+                </div>
+                <h1 class="hero-title">
+                    <span class="gradient-text">Teknoloji Bağımlılığı</span>
+                    <br>Kontrolü Geri Alın
+                </h1>
+                <p class="hero-description">
+                    Modern yaşamın en yaygın sorunlarından biri olan teknoloji bağımlılığı hakkında 
+                    kapsamlı bilgi edinin. Belirtileri tanıyın, etkilerini öğrenin ve sağlıklı 
+                    çözümler bulun.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#nedir" class="btn btn-primary">
+                        <span>Keşfet</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#test" class="btn btn-secondary">
+                        <i class="fas fa-clipboard-check"></i>
+                        <span>Kendini Test Et</span>
+                    </a>
+                </div>
+                <div class="hero-features">
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Kapsamlı Rehber</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Uzman Önerileri</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>İnteraktif Test</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-card glass-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-number" data-target="73">0</div>
+                    <div class="stat-unit">%</div>
+                    <div class="stat-label">Gençler günde 4+ saat ekran başında</div>
+                </div>
+                <div class="stat-card glass-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="stat-number" data-target="89">0</div>
+                    <div class="stat-unit">%</div>
+                    <div class="stat-label">İnsanlar telefonlarını yanlarında tutuyor</div>
+                </div>
+                <div class="stat-card glass-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-bed"></i>
+                    </div>
+                    <div class="stat-number" data-target="52">0</div>
+                    <div class="stat-unit">%</div>
+                    <div class="stat-label">Uyku kalitesi teknolojiden etkileniyor</div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- What is Technology Addiction -->
+    <section id="nedir" class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Bilgi</span>
+                </div>
+                <h2 class="section-title">Teknoloji Bağımlılığı Nedir?</h2>
+                <p class="section-subtitle">Kapsamlı bir tanım ve açıklama</p>
+            </div>
+            <div class="content-grid">
+                <div class="content-card glass-card">
+                    <div class="card-icon-wrapper">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Tanım</h3>
+                    <p>
+                        Teknoloji bağımlılığı, bireyin teknolojik cihazları ve dijital platformları 
+                        kontrol edememesi ve bunlar olmadan yaşayamayacağını hissetmesi durumudur. 
+                        Bu bağımlılık, kişinin günlük yaşamını, ilişkilerini ve sağlığını olumsuz 
+                        yönde etkileyebilir.
+                    </p>
+                </div>
+                <div class="content-card glass-card">
+                    <div class="card-icon-wrapper">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Kapsam</h3>
+                    <p>
+                        Teknoloji bağımlılığı sadece telefon veya bilgisayar kullanımıyla sınırlı 
+                        değildir. Sosyal medya, online oyunlar, video platformları, mesajlaşma 
+                        uygulamaları ve diğer dijital platformlar da bağımlılık yaratabilir.
+                    </p>
+                </div>
+                <div class="content-card glass-card">
+                    <div class="card-icon-wrapper">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3>Önem</h3>
+                    <p>
+                        Dünya genelinde milyonlarca insan teknoloji bağımlılığından etkilenmektedir. 
+                        Özellikle gençler ve çocuklar risk altındadır. Erken farkındalık ve müdahale 
+                        kritik öneme sahiptir.
+                    </p>
+                </div>
+            </div>
+
+            <div class="types-section">
+                <h3 class="subsection-title">Bağımlılık Türleri</h3>
+                <div class="types-grid">
+                    <div class="type-card glass-card">
+                        <div class="type-icon"><i class="fas fa-mobile-alt"></i></div>
+                        <h4>Akıllı Telefon Bağımlılığı</h4>
+                        <p>Sürekli telefon kontrolü, bildirim beklentisi, nomofobi (telefonsuz kalma korkusu)</p>
+                    </div>
+                    <div class="type-card glass-card">
+                        <div class="type-icon"><i class="fab fa-facebook"></i></div>
+                        <h4>Sosyal Medya Bağımlılığı</h4>
+                        <p>Facebook, Instagram, Twitter gibi platformlarda aşırı zaman geçirme</p>
+                    </div>
+                    <div class="type-card glass-card">
+                        <div class="type-icon"><i class="fas fa-gamepad"></i></div>
+                        <h4>Online Oyun Bağımlılığı</h4>
+                        <p>Video oyunlarında kontrolsüz zaman harcama, gerçek hayattan uzaklaşma</p>
+                    </div>
+                    <div class="type-card glass-card">
+                        <div class="type-icon"><i class="fas fa-wifi"></i></div>
+                        <h4>İnternet Bağımlılığı</h4>
+                        <p>Genel internet kullanımında kontrol kaybı, sürekli online olma ihtiyacı</p>
+                    </div>
+                    <div class="type-card glass-card">
+                        <div class="type-icon"><i class="fab fa-youtube"></i></div>
+                        <h4>Video Platformu Bağımlılığı</h4>
+                        <p>YouTube, Netflix gibi platformlarda aşırı içerik tüketimi</p>
+                    </div>
+                    <div class="type-card glass-card">
+                        <div class="type-icon"><i class="fab fa-whatsapp"></i></div>
+                        <h4>Mesajlaşma Bağımlılığı</h4>
+                        <p>WhatsApp, Telegram gibi uygulamalarda sürekli mesaj kontrolü</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Symptoms Section -->
+    <section id="belirtiler" class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>Belirtiler</span>
+                </div>
+                <h2 class="section-title">Belirtiler ve İşaretler</h2>
+                <p class="section-subtitle">Kendinizi veya sevdiklerinizi değerlendirin</p>
+            </div>
+
+            <div class="symptoms-categories">
+                <div class="symptom-category glass-card">
+                    <div class="symptom-header">
+                        <div class="symptom-icon-wrapper">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Zaman Yönetimi Sorunları</h3>
+                    </div>
+                    <div class="symptom-list">
+                        <div class="symptom-item">
+                            <i class="fas fa-check symptom-check"></i>
+                            <p>Teknoloji kullanımı için planlanandan çok daha fazla zaman harcamak</p>
+                        </div>
+                        <div class="symptom-item">
+                            <i class="fas fa-check symptom-check"></i>
+                            <p>Zamanın nasıl geçtiğini fark edememek</p>
+                        </div>
+                        <div class="symptom-item">
+                            <i class="fas fa-check symptom-check"></i>
+                            <p>Önemli işleri ertelemek veya ihmal etmek</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="symptom-category glass-card">
+                    <div class="symptom-header">
+                        <div class="symptom-icon-wrapper">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h3>Yoksunluk Belirtileri</h3>
+                    </div>
+                    <div class="symptom-list">
+                        <div class="symptom-item">
+                            <i class="fas fa-check symptom-check"></i>
+                            <p>Cihazlardan uzak kaldığında huzursuzluk, kaygı veya sinirlilik</p>
+                        </div>
+                        <div class="symptom-item">
+                            <i class="fas fa-check symptom-check"></i>
+                            <p>Nomofobi (telefonsuz kalma korkusu)</p>
+                        </div>
+                        <div class="symptom-item">
+                            <i class="fas fa-check symptom-check"></i>
+                            <p>Sürekli cihaz kontrolü yapma ihtiyacı</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="symptom-category glass-card">
+                    <div class="symptom-header">
+                        <div class="symptom-icon-wrapper">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Tolerans Geliştirme</h3>
+                    </div>
+                    <div class="symptom-list">
+                        <div class="symptom-item">
+                            <i class="fas fa-check symptom-check"></i>
+                            <p>Aynı tatmini almak için giderek daha fazla zaman harcama ihtiyacı</p>
+                        </div>
+                        <div class="symptom-item">
+                            <i class="fas fa-check symptom-check"></i>
+                            <p>Daha fazla içerik tüketme isteği</p>
+                        </div>
+                        <div class="symptom-item">
+                            <i class="fas fa-check symptom-check"></i>
+                            <p>Daha uzun süreler boyunca kullanma ihtiyacı</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="symptom-category glass-card">
+                    <div class="symptom-header">
+                        <div class="symptom-icon-wrapper">
+                            <i class="fas fa-ban"></i>
+                        </div>
+                        <h3>Kontrol Kaybı</h3>
+                    </div>
+                    <div class="symptom-list">
+                        <div class="symptom-item">
+                            <i class="fas fa-check symptom-check"></i>
+                            <p>Teknoloji kullanımını azaltma veya bırakma konusunda başarısız denemeler</p>
+                        </div>
+                        <div class="symptom-item">
+                            <i class="fas fa-check symptom-check"></i>
+                            <p>Kullanım süresini kontrol edememe</p>
+                        </div>
+                        <div class="symptom-item">
+                            <i class="fas fa-check symptom-check"></i>
+                            <p>Kendini durduramama hissi</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="symptom-category glass-card">
+                    <div class="symptom-header">
+                        <div class="symptom-icon-wrapper">
+                            <i class="fas fa-users-slash"></i>
+                        </div>
+                        <h3>Sosyal İzolasyon</h3>
+                    </div>
+                    <div class="symptom-list">
+                        <div class="symptom-item">
+                            <i class="fas fa-check symptom-check"></i>
+                            <p>Aile, arkadaşlar ve sosyal aktivitelerden uzaklaşmak</p>
+                        </div>
+                        <div class="symptom-item">
+                            <i class="fas fa-check symptom-check"></i>
+                            <p>Teknoloji kullanımını sosyal etkileşimlere tercih etmek</p>
+                        </div>
+                        <div class="symptom-item">
+                            <i class="fas fa-check symptom-check"></i>
+                            <p>Yüz yüze iletişimden kaçınma</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="symptom-category glass-card">
+                    <div class="symptom-header">
+                        <div class="symptom-icon-wrapper">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                        <h3>Uyku Bozuklukları</h3>
+                    </div>
+                    <div class="symptom-list">
+                        <div class="symptom-item">
+                            <i class="fas fa-check symptom-check"></i>
+                            <p>Gece geç saatlere kadar teknoloji kullanımı</p>
+                        </div>
+                        <div class="symptom-item">
+                            <i class="fas fa-check symptom-check"></i>
+                            <p>Uyku düzeninin bozulması</p>
+                        </div>
+                        <div class="symptom-item">
+                            <i class="fas fa-check symptom-check"></i>
+                            <p>Yatak odasında cihaz kullanımı</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Effects Section -->
+    <section id="etkiler" class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span>Etkiler</span>
+                </div>
+                <h2 class="section-title">Fiziksel, Psikolojik ve Sosyal Etkiler</h2>
+                <p class="section-subtitle">Teknoloji bağımlılığının yaşamımıza etkileri</p>
+            </div>
+
+            <div class="effects-tabs">
+                <button class="tab-btn active" data-tab="fiziksel">
+                    <i class="fas fa-user-md"></i>
+                    <span>Fiziksel Etkiler</span>
+                </button>
+                <button class="tab-btn" data-tab="psikolojik">
+                    <i class="fas fa-brain"></i>
+                    <span>Psikolojik Etkiler</span>
+                </button>
+                <button class="tab-btn" data-tab="sosyal">
+                    <i class="fas fa-users"></i>
+                    <span>Sosyal Etkiler</span>
+                </button>
+            </div>
+
+            <div class="tab-content active" id="fiziksel">
+                <div class="effects-grid">
+                    <div class="effect-category glass-card">
+                        <div class="effect-icon"><i class="fas fa-eye"></i></div>
+                        <h3>Görme Problemleri</h3>
+                        <ul>
+                            <li><i class="fas fa-circle"></i> Göz yorgunluğu ve kuruluğu</li>
+                            <li><i class="fas fa-circle"></i> Bulanık görme</li>
+                            <li><i class="fas fa-circle"></i> Işık hassasiyeti</li>
+                            <li><i class="fas fa-circle"></i> Dijital göz yorgunluğu sendromu</li>
+                            <li><i class="fas fa-circle"></i> Miyopi riskinde artış</li>
+                        </ul>
+                    </div>
+                    <div class="effect-category glass-card">
+                        <div class="effect-icon"><i class="fas fa-bone"></i></div>
+                        <h3>Kas-İskelet Sistemi</h3>
+                        <ul>
+                            <li><i class="fas fa-circle"></i> Boyun ve sırt ağrıları (text neck)</li>
+                            <li><i class="fas fa-circle"></i> Duruş bozuklukları</li>
+                            <li><i class="fas fa-circle"></i> Karpal tünel sendromu</li>
+                            <li><i class="fas fa-circle"></i> Omuz ve el bileği ağrıları</li>
+                            <li><i class="fas fa-circle"></i> Kas gerginliği</li>
+                        </ul>
+                    </div>
+                    <div class="effect-category glass-card">
+                        <div class="effect-icon"><i class="fas fa-bed"></i></div>
+                        <h3>Uyku Bozuklukları</h3>
+                        <ul>
+                            <li><i class="fas fa-circle"></i> Uykusuzluk (insomnia)</li>
+                            <li><i class="fas fa-circle"></i> Uyku kalitesinde düşüş</li>
+                            <li><i class="fas fa-circle"></i> Melatonin üretiminin bozulması</li>
+                            <li><i class="fas fa-circle"></i> Gece uyanmaları</li>
+                            <li><i class="fas fa-circle"></i> Gündüz yorgunluğu</li>
+                        </ul>
+                    </div>
+                    <div class="effect-category glass-card">
+                        <div class="effect-icon"><i class="fas fa-heartbeat"></i></div>
+                        <h3>Diğer Fiziksel Sorunlar</h3>
+                        <ul>
+                            <li><i class="fas fa-circle"></i> Obezite riski (hareketsiz yaşam)</li>
+                            <li><i class="fas fa-circle"></i> Baş ağrıları ve migren</li>
+                            <li><i class="fas fa-circle"></i> Yorgunluk ve enerji eksikliği</li>
+                            <li><i class="fas fa-circle"></i> Dolaşım problemleri</li>
+                            <li><i class="fas fa-circle"></i> Bağışıklık sisteminde zayıflama</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="psikolojik">
+                <div class="effects-grid">
+                    <div class="effect-category glass-card">
+                        <div class="effect-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                        <h3>Anksiyete</h3>
+                        <ul>
+                            <li><i class="fas fa-circle"></i> Sürekli bildirim kontrolü kaygısı</li>
+                            <li><i class="fas fa-circle"></i> Sosyal medya kaygısı</li>
+                            <li><i class="fas fa-circle"></i> FOMO (Fear of Missing Out)</li>
+                            <li><i class="fas fa-circle"></i> Nomofobi (telefonsuz kalma korkusu)</li>
+                            <li><i class="fas fa-circle"></i> Genel kaygı bozuklukları</li>
+                        </ul>
+                    </div>
+                    <div class="effect-category glass-card">
+                        <div class="effect-icon"><i class="fas fa-sad-tear"></i></div>
+                        <h3>Depresyon</h3>
+                        <ul>
+                            <li><i class="fas fa-circle"></i> Sosyal karşılaştırmalar</li>
+                            <li><i class="fas fa-circle"></i> Gerçek hayattan uzaklaşma</li>
+                            <li><i class="fas fa-circle"></i> Yalnızlık hissi</li>
+                            <li><i class="fas fa-circle"></i> Öz saygıda düşüş</li>
+                            <li><i class="fas fa-circle"></i> Motivasyon kaybı</li>
+                        </ul>
+                    </div>
+                    <div class="effect-category glass-card">
+                        <div class="effect-icon"><i class="fas fa-lightbulb"></i></div>
+                        <h3>Dikkat Eksikliği</h3>
+                        <ul>
+                            <li><i class="fas fa-circle"></i> Odaklanma zorluğu</li>
+                            <li><i class="fas fa-circle"></i> Sürekli dikkat dağınıklığı</li>
+                            <li><i class="fas fa-circle"></i> Multitasking sorunları</li>
+                            <li><i class="fas fa-circle"></i> Konsantrasyon eksikliği</li>
+                            <li><i class="fas fa-circle"></i> İş ve okul performansında düşüş</li>
+                        </ul>
+                    </div>
+                    <div class="effect-category glass-card">
+                        <div class="effect-icon"><i class="fas fa-user-shield"></i></div>
+                        <h3>Öz Saygı Sorunları</h3>
+                        <ul>
+                            <li><i class="fas fa-circle"></i> Sosyal medyada kendini başkalarıyla karşılaştırma</li>
+                            <li><i class="fas fa-circle"></i> Gerçekçi olmayan beklentiler</li>
+                            <li><i class="fas fa-circle"></i> Dış görünüş kaygısı</li>
+                            <li><i class="fas fa-circle"></i> Başarı algısında bozulma</li>
+                            <li><i class="fas fa-circle"></i> Kendini değersiz hissetme</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="sosyal">
+                <div class="effects-grid">
+                    <div class="effect-category glass-card">
+                        <div class="effect-icon"><i class="fas fa-home"></i></div>
+                        <h3>Aile İlişkileri</h3>
+                        <ul>
+                            <li><i class="fas fa-circle"></i> Yüz yüze iletişimin azalması</li>
+                            <li><i class="fas fa-circle"></i> Aile yemeklerinde cihaz kullanımı</li>
+                            <li><i class="fas fa-circle"></i> Çocuk-ebeveyn ilişkilerinde bozulma</li>
+                            <li><i class="fas fa-circle"></i> Ortak aktivitelerin azalması</li>
+                            <li><i class="fas fa-circle"></i> Aile içi çatışmalar</li>
+                        </ul>
+                    </div>
+                    <div class="effect-category glass-card">
+                        <div class="effect-icon"><i class="fas fa-user-friends"></i></div>
+                        <h3>Arkadaş İlişkileri</h3>
+                        <ul>
+                            <li><i class="fas fa-circle"></i> Gerçek sosyal etkileşimlerin azalması</li>
+                            <li><i class="fas fa-circle"></i> Sosyal beceri eksikliği</li>
+                            <li><i class="fas fa-circle"></i> Empati kurma zorluğu</li>
+                            <li><i class="fas fa-circle"></i> Yalnızlık hissi</li>
+                            <li><i class="fas fa-circle"></i> Arkadaşlık ilişkilerinde zayıflama</li>
+                        </ul>
+                    </div>
+                    <div class="effect-category glass-card">
+                        <div class="effect-icon"><i class="fas fa-briefcase"></i></div>
+                        <h3>İş ve Okul Hayatı</h3>
+                        <ul>
+                            <li><i class="fas fa-circle"></i> İş performansında düşüş</li>
+                            <li><i class="fas fa-circle"></i> Okul başarısında azalma</li>
+                            <li><i class="fas fa-circle"></i> Dikkat ve konsantrasyon sorunları</li>
+                            <li><i class="fas fa-circle"></i> Zaman yönetimi problemleri</li>
+                            <li><i class="fas fa-circle"></i> Mesleki ilişkilerde bozulma</li>
+                        </ul>
+                    </div>
+                    <div class="effect-category glass-card">
+                        <div class="effect-icon"><i class="fas fa-comments"></i></div>
+                        <h3>İletişim Problemleri</h3>
+                        <ul>
+                            <li><i class="fas fa-circle"></i> Yüz yüze konuşma becerilerinin zayıflaması</li>
+                            <li><i class="fas fa-circle"></i> Beden dilini okuma zorluğu</li>
+                            <li><i class="fas fa-circle"></i> Gerçek dünya deneyimlerinden uzaklaşma</li>
+                            <li><i class="fas fa-circle"></i> Dijital iletişime bağımlılık</li>
+                            <li><i class="fas fa-circle"></i> Duygusal zeka eksikliği</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section id="cozumler" class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>Çözümler</span>
+                </div>
+                <h2 class="section-title">Çözüm Önerileri ve Stratejiler</h2>
+                <p class="section-subtitle">Sağlıklı bir dijital yaşam için pratik çözümler</p>
+            </div>
+
+            <div class="solutions-grid">
+                <div class="solution-card glass-card">
+                    <div class="solution-icon"><i class="fas fa-clock"></i></div>
+                    <h3>Zaman Sınırları Koyun</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Günlük kullanım sürelerini belirleyin</li>
+                        <li><i class="fas fa-check"></i> Telefon ve bilgisayar için zamanlayıcı kullanın</li>
+                        <li><i class="fas fa-check"></i> Uygulama kullanım sürelerini takip edin</li>
+                        <li><i class="fas fa-check"></i> Günlük hedefler koyun ve bunlara uyun</li>
+                        <li><i class="fas fa-check"></i> Ekran süresi uygulamaları kullanın</li>
+                    </ul>
+                </div>
+
+                <div class="solution-card glass-card">
+                    <div class="solution-icon"><i class="fas fa-power-off"></i></div>
+                    <h3>Teknoloji Detoksu Yapın</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Belirli günlerde cihazlardan uzak durun</li>
+                        <li><i class="fas fa-check"></i> Hafta sonları dijital detoks yapın</li>
+                        <li><i class="fas fa-check"></i> Belirli saatlerde telefonu kapatın</li>
+                        <li><i class="fas fa-check"></i> Dijital detoks günleri planlayın</li>
+                        <li><i class="fas fa-check"></i> Kademeli olarak kullanımı azaltın</li>
+                    </ul>
+                </div>
+
+                <div class="solution-card glass-card">
+                    <div class="solution-icon"><i class="fas fa-running"></i></div>
+                    <h3>Fiziksel Aktivite</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Düzenli egzersiz yapın</li>
+                        <li><i class="fas fa-check"></i> Açık havada zaman geçirin</li>
+                        <li><i class="fas fa-check"></i> Spor ve hobiler edinin</li>
+                        <li><i class="fas fa-check"></i> Yürüyüş ve doğa aktiviteleri yapın</li>
+                        <li><i class="fas fa-check"></i> Hareketli yaşam tarzı benimseyin</li>
+                    </ul>
+                </div>
+
+                <div class="solution-card glass-card">
+                    <div class="solution-icon"><i class="fas fa-users"></i></div>
+                    <h3>Sosyal Bağlantılar</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Yüz yüze sosyal etkileşimlere öncelik verin</li>
+                        <li><i class="fas fa-check"></i> Aile ve arkadaşlarla kaliteli zaman geçirin</li>
+                        <li><i class="fas fa-check"></i> Sosyal aktivitelere katılın</li>
+                        <li><i class="fas fa-check"></i> Grup aktiviteleri düzenleyin</li>
+                        <li><i class="fas fa-check"></i> Gerçek ilişkilere yatırım yapın</li>
+                    </ul>
+                </div>
+
+                <div class="solution-card glass-card">
+                    <div class="solution-icon"><i class="fas fa-book-reader"></i></div>
+                    <h3>Alternatif Aktiviteler</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Kitap okuma alışkanlığı edinin</li>
+                        <li><i class="fas fa-check"></i> Müzik dinleme ve enstrüman çalma</li>
+                        <li><i class="fas fa-check"></i> Sanat ve el işleri yapın</li>
+                        <li><i class="fas fa-check"></i> Yemek yapma ve yeni tarifler deneyin</li>
+                        <li><i class="fas fa-check"></i> Bahçe işleri ve doğa aktiviteleri</li>
+                    </ul>
+                </div>
+
+                <div class="solution-card glass-card">
+                    <div class="solution-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3>Pratik İpuçları</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Yatak odasında telefon ve bilgisayar bulundurmayın</li>
+                        <li><i class="fas fa-check"></i> Bildirimleri kapatın veya sessize alın</li>
+                        <li><i class="fas fa-check"></i> Yemek saatlerinde cihazları kullanmayın</li>
+                        <li><i class="fas fa-check"></i> Gereksiz uygulamaları silin</li>
+                        <li><i class="fas fa-check"></i> Aile ve arkadaşlarla "cihazsız" zamanlar planlayın</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="professional-help">
+                <h3 class="subsection-title">Profesyonel Yardım</h3>
+                <div class="help-grid">
+                    <div class="help-card glass-card">
+                        <i class="fas fa-user-md"></i>
+                        <h4>Psikolog Desteği</h4>
+                        <p>Bağımlılık konusunda uzman psikologlardan destek alın. Bilişsel davranışçı terapi gibi yöntemler etkili olabilir.</p>
+                    </div>
+                    <div class="help-card glass-card">
+                        <i class="fas fa-comments"></i>
+                        <h4>Danışmanlık Hizmetleri</h4>
+                        <p>Bağımlılık danışmanlığı alarak kişiselleştirilmiş çözümler bulabilirsiniz.</p>
+                    </div>
+                    <div class="help-card glass-card">
+                        <i class="fas fa-users"></i>
+                        <h4>Destek Grupları</h4>
+                        <p>Benzer sorunları yaşayan insanlarla bir araya gelerek deneyim paylaşımı yapın.</p>
+                    </div>
+                    <div class="help-card glass-card">
+                        <i class="fas fa-hospital"></i>
+                        <h4>Bağımlılık Tedavi Programları</h4>
+                        <p>Ciddi durumlarda özel tedavi programlarına katılabilirsiniz.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="galeri" class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-images"></i>
+                    <span>Galeri</span>
+                </div>
+                <h2 class="section-title">Görsel Galeri</h2>
+                <p class="section-subtitle">Teknoloji bağımlılığı hakkında görsel içerikler</p>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <div style="width: 100%; height: 100%; background: var(--primary-gradient); display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="gallery-overlay">
+                        <h4>Akıllı Telefon Kullanımı</h4>
+                        <p>Günlük telefon kullanım istatistikleri ve etkileri</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div style="width: 100%; height: 100%; background: var(--secondary-gradient); display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <div class="gallery-overlay">
+                        <h4>Bilgisayar Bağımlılığı</h4>
+                        <p>Uzun süreli bilgisayar kullanımının etkileri</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div style="width: 100%; height: 100%; background: var(--accent-gradient); display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <div class="gallery-overlay">
+                        <h4>Sosyal Medya</h4>
+                        <p>Sosyal medya platformlarının etkileri</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="gallery-overlay">
+                        <h4>Oyun Bağımlılığı</h4>
+                        <p>Online oyun bağımlılığının belirtileri</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                        <i class="fas fa-bed"></i>
+                    </div>
+                    <div class="gallery-overlay">
+                        <h4>Uyku Bozuklukları</h4>
+                        <p>Teknolojinin uyku kalitesine etkileri</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="gallery-overlay">
+                        <h4>Sosyal İzolasyon</h4>
+                        <p>Teknoloji bağımlılığının sosyal etkileri</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories Section -->
+    <section id="hikayeler" class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-star"></i>
+                    <span>Başarı Hikayeleri</span>
+                </div>
+                <h2 class="section-title">Başarı Hikayeleri</h2>
+                <p class="section-subtitle">Teknoloji bağımlılığını yenmiş insanların hikayeleri</p>
+            </div>
+
+            <div class="stories-slider">
+                <div class="stories-container" id="stories-container">
+                    <div class="story-card">
+                        <div class="story-content">
+                            <div class="story-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="story-quote">
+                                "Teknoloji bağımlılığımı yenmek için 6 ay süren bir yolculuk yaptım. 
+                                Şimdi daha dengeli bir yaşam sürüyorum ve gerçek ilişkilere odaklanıyorum."
+                            </div>
+                            <div class="story-author">Ayşe Yılmaz</div>
+                            <div class="story-role">Öğrenci, 24 yaş</div>
+                            <div class="story-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="story-card">
+                        <div class="story-content">
+                            <div class="story-avatar">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div class="story-quote">
+                                "Profesyonel yardım alarak teknoloji kullanımımı kontrol altına aldım. 
+                                İş performansım arttı ve ailemle daha kaliteli zaman geçiriyorum."
+                            </div>
+                            <div class="story-author">Mehmet Demir</div>
+                            <div class="story-role">İş İnsanı, 35 yaş</div>
+                            <div class="story-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="story-card">
+                        <div class="story-content">
+                            <div class="story-avatar">
+                                <i class="fas fa-user-graduate"></i>
+                            </div>
+                            <div class="story-quote">
+                                "Dijital detoks programına katılarak hayatımı değiştirdim. 
+                                Artık teknolojiyi bilinçli kullanıyorum ve hobilerime daha fazla zaman ayırıyorum."
+                            </div>
+                            <div class="story-author">Zeynep Kaya</div>
+                            <div class="story-role">Öğretmen, 28 yaş</div>
+                            <div class="story-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-nav" id="stories-nav">
+                    <div class="slider-dot active" onclick="goToStory(0)"></div>
+                    <div class="slider-dot" onclick="goToStory(1)"></div>
+                    <div class="slider-dot" onclick="goToStory(2)"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="sss" class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Sık Sorulan Sorular</span>
+                </div>
+                <h2 class="section-title">Sık Sorulan Sorular</h2>
+                <p class="section-subtitle">Teknoloji bağımlılığı hakkında merak edilenler</p>
+            </div>
+
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Teknoloji bağımlılığı nedir?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Teknoloji bağımlılığı, bireyin teknolojik cihazları ve dijital platformları kontrol edememesi ve bunlar olmadan yaşayamayacağını hissetmesi durumudur. Bu bağımlılık, kişinin günlük yaşamını, ilişkilerini ve sağlığını olumsuz yönde etkileyebilir.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Teknoloji bağımlılığının belirtileri nelerdir?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Başlıca belirtiler arasında zaman yönetimi sorunları, yoksunluk belirtileri (huzursuzluk, kaygı), tolerans geliştirme (daha fazla kullanım ihtiyacı), kontrol kaybı, sosyal izolasyon ve uyku bozuklukları yer alır.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Teknoloji bağımlılığı nasıl tedavi edilir?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Tedavi yöntemleri arasında zaman sınırları koyma, teknoloji detoksu, fiziksel aktivite, sosyal bağlantılar kurma, alternatif aktiviteler bulma ve profesyonel yardım alma yer alır. Ciddi durumlarda psikolog desteği ve bağımlılık danışmanlığı önerilir.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Çocuklarda teknoloji bağımlılığı nasıl önlenir?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Ebeveynler çocuklara erken yaşta sınırlar koymalı, teknoloji kullanımını denetlemeli, alternatif aktiviteler sunmalı, rol model olmalı ve açık iletişim kurmalıdır. Ayrıca birlikte kaliteli zaman geçirmek ve teknoloji kullanım kuralları belirlemek önemlidir.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Günde ne kadar teknoloji kullanımı normaldir?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Uzmanlar, yetişkinler için günde 2-3 saat, çocuklar için ise yaşlarına göre 1-2 saat arası teknoloji kullanımını önermektedir. Ancak önemli olan süre değil, kullanımın kontrollü ve amaçlı olmasıdır.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Teknoloji bağımlılığı fiziksel sağlığı etkiler mi?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Evet, teknoloji bağımlılığı görme problemleri, kas-iskelet sistemi sorunları (boyun ve sırt ağrıları), uyku bozuklukları, obezite riski, baş ağrıları ve dolaşım problemleri gibi fiziksel sağlık sorunlarına yol açabilir.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Test Section -->
+    <section id="test" class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-clipboard-check"></i>
+                    <span>Test</span>
+                </div>
+                <h2 class="section-title">Kendinizi Değerlendirin</h2>
+                <p class="section-subtitle">Aşağıdaki soruları cevaplayarak teknoloji bağımlılığı riskinizi öğrenin</p>
+            </div>
+
+            <div class="test-container glass-card">
+                <div class="test-question" id="test-question">
+                    <div class="test-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3 id="question-text">Test başlamak için hazır mısınız?</h3>
+                    <div class="test-options" id="test-options">
+                        <button class="option-btn" onclick="startTest()">
+                            <i class="fas fa-play"></i>
+                            <span>Teste Başla</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="test-progress">
+                    <div class="progress-bar" id="test-progress"></div>
+                </div>
+                <div class="test-result" id="test-result" style="display: none;">
+                    <div class="result-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h3 id="result-title"></h3>
+                    <p id="result-description"></p>
+                    <div id="result-recommendations"></div>
+                    <button class="btn btn-primary" onclick="resetTest()">
+                        <i class="fas fa-redo"></i>
+                        <span>Testi Tekrarla</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prevention Section -->
+    <section id="onleme" class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Önleme</span>
+                </div>
+                <h2 class="section-title">Önleme Stratejileri</h2>
+                <p class="section-subtitle">Bağımlılığı önlemek için alınabilecek önlemler</p>
+            </div>
+
+            <div class="prevention-grid">
+                <div class="prevention-card glass-card">
+                    <div class="prevention-icon"><i class="fas fa-home"></i></div>
+                    <h3>Ebeveynler İçin</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Çocuklara erken yaşta sınırlar koyun</li>
+                        <li><i class="fas fa-check"></i> Teknoloji kullanımını denetleyin</li>
+                        <li><i class="fas fa-check"></i> Alternatif aktiviteler sunun</li>
+                        <li><i class="fas fa-check"></i> Rol model olun</li>
+                        <li><i class="fas fa-check"></i> Açık iletişim kurun</li>
+                        <li><i class="fas fa-check"></i> Birlikte kaliteli zaman geçirin</li>
+                        <li><i class="fas fa-check"></i> Teknoloji kullanım kuralları belirleyin</li>
+                    </ul>
+                </div>
+
+                <div class="prevention-card glass-card">
+                    <div class="prevention-icon"><i class="fas fa-school"></i></div>
+                    <h3>Okullar İçin</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Dijital okuryazarlık eğitimi verin</li>
+                        <li><i class="fas fa-check"></i> Teknoloji kullanım politikaları oluşturun</li>
+                        <li><i class="fas fa-check"></i> Farkındalık programları düzenleyin</li>
+                        <li><i class="fas fa-check"></i> Danışmanlık hizmetleri sunun</li>
+                        <li><i class="fas fa-check"></i> Alternatif aktiviteler organize edin</li>
+                        <li><i class="fas fa-check"></i> Öğrencileri bilinçlendirin</li>
+                        <li><i class="fas fa-check"></i> Ebeveyn eğitimleri düzenleyin</li>
+                    </ul>
+                </div>
+
+                <div class="prevention-card glass-card">
+                    <div class="prevention-icon"><i class="fas fa-globe"></i></div>
+                    <h3>Toplum İçin</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Farkındalık kampanyaları düzenleyin</li>
+                        <li><i class="fas fa-check"></i> Eğitim programları oluşturun</li>
+                        <li><i class="fas fa-check"></i> Destek grupları oluşturun</li>
+                        <li><i class="fas fa-check"></i> Politika geliştirme çalışmaları yapın</li>
+                        <li><i class="fas fa-check"></i> Araştırma ve veri toplama</li>
+                        <li><i class="fas fa-check"></i> Toplumsal bilinçlendirme</li>
+                        <li><i class="fas fa-check"></i> Kaynak ve hizmet sağlama</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="kaynaklar" class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-book"></i>
+                    <span>Kaynaklar</span>
+                </div>
+                <h2 class="section-title">Yardımcı Kaynaklar</h2>
+                <p class="section-subtitle">Daha fazla bilgi ve destek için</p>
+            </div>
+
+            <div class="resources-grid">
+                <div class="resource-card glass-card">
+                    <div class="resource-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>Uygulamalar</h3>
+                    <ul>
+                        <li><strong>Screen Time (iOS):</strong> Ekran süresi takibi</li>
+                        <li><strong>Digital Wellbeing (Android):</strong> Dijital sağlık araçları</li>
+                        <li><strong>Forest:</strong> Odaklanma ve üretkenlik</li>
+                        <li><strong>Moment:</strong> Telefon kullanım takibi</li>
+                        <li><strong>Offtime:</strong> Dijital detoks</li>
+                    </ul>
+                </div>
+
+                <div class="resource-card glass-card">
+                    <div class="resource-icon"><i class="fas fa-book-open"></i></div>
+                    <h3>Kitaplar</h3>
+                    <ul>
+                        <li>"Dijital Minimalizm" - Cal Newport</li>
+                        <li>"Teknoloji Bağımlılığı" - Dr. Mehmet Dinç</li>
+                        <li>"Deep Work" - Cal Newport</li>
+                        <li>"The Shallows" - Nicholas Carr</li>
+                        <li>"Reclaiming Conversation" - Sherry Turkle</li>
+                    </ul>
+                </div>
+
+                <div class="resource-card glass-card">
+                    <div class="resource-icon"><i class="fas fa-globe"></i></div>
+                    <h3>Web Siteleri</h3>
+                    <ul>
+                        <li>Teknoloji Bağımlılığı Derneği</li>
+                        <li>Dijital Sağlık Platformları</li>
+                        <li>Online Destek Grupları</li>
+                        <li>Eğitim ve Farkındalık Siteleri</li>
+                        <li>Araştırma ve İstatistik Kaynakları</li>
+                    </ul>
+                </div>
+
+                <div class="resource-card glass-card">
+                    <div class="resource-icon"><i class="fas fa-phone"></i></div>
+                    <h3>Destek Hatları</h3>
+                    <ul>
+                        <li><strong>Yeşilay Danışmanlık Merkezi:</strong> 444 79 75</li>
+                        <li><strong>Sağlık Bakanlığı:</strong> 184</li>
+                        <li><strong>Psikolojik Destek Hatları</strong></li>
+                        <li><strong>Bağımlılık Danışmanlık Merkezleri</strong></li>
+                        <li><strong>Acil Durum Hatları</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>Teknoloji Bağımlılığı</h3>
+                    </div>
+                    <p>Dijital çağda sağlıklı bir yaşam için bilinçli teknoloji kullanımı.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Hızlı Linkler</h4>
+                    <ul>
+                        <li><a href="#anasayfa">Ana Sayfa</a></li>
+                        <li><a href="#nedir">Nedir?</a></li>
+                        <li><a href="#belirtiler">Belirtiler</a></li>
+                        <li><a href="#etkiler">Etkiler</a></li>
+                        <li><a href="#cozumler">Çözümler</a></li>
+                        <li><a href="#galeri">Galeri</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Destek</h4>
+                    <ul>
+                        <li><a href="#test">Kendini Test Et</a></li>
+                        <li><a href="#hikayeler">Başarı Hikayeleri</a></li>
+                        <li><a href="#sss">Sık Sorulan Sorular</a></li>
+                        <li><a href="#kaynaklar">Kaynaklar</a></li>
+                        <li><a href="#onleme">Önleme</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>İletişim</h4>
+                    <p>Daha fazla bilgi ve destek için profesyonel yardım alın.</p>
+                    <p class="footer-note">Bu site bilgilendirme amaçlıdır. Ciddi durumlarda mutlaka profesyonel yardım alın.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Hazırlayan: Ömer Said Ekinci</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+
+            // Close menu when clicking on a link
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                });
+            });
+        }
+
+        // Active Navigation Link
+        const sections = document.querySelectorAll('.section');
+        const navLinks = document.querySelectorAll('.nav-menu a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Tab Functionality
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetTab = button.getAttribute('data-tab');
+
+                // Remove active class from all buttons and contents
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                // Add active class to clicked button and corresponding content
+                button.classList.add('active');
+                document.getElementById(targetTab).classList.add('active');
+            });
+        });
+
+        // Animated Counter for Stats
+        const animateCounter = (element, target, duration = 2000) => {
+            let start = 0;
+            const increment = target / (duration / 16);
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(start);
+                }
+            }, 16);
+        };
+
+        // Intersection Observer for Stats Animation
+        const statCards = document.querySelectorAll('.stat-card');
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumber = entry.target.querySelector('.stat-number');
+                    const target = parseInt(statNumber.getAttribute('data-target'));
+                    if (statNumber.textContent === '0') {
+                        animateCounter(statNumber, target);
+                    }
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statCards.forEach(card => {
+            statsObserver.observe(card);
+        });
+
+        // Test Functionality
+        const testQuestions = [
+            {
+                question: "Günde kaç saat teknoloji kullanıyorsunuz?",
+                options: [
+                    { text: "2 saatten az", score: 1 },
+                    { text: "2-4 saat", score: 2 },
+                    { text: "4-6 saat", score: 3 },
+                    { text: "6 saatten fazla", score: 4 }
+                ]
+            },
+            {
+                question: "Telefonunuzu kontrol etmeden ne kadar süre durabilirsiniz?",
+                options: [
+                    { text: "Birkaç saat", score: 1 },
+                    { text: "1 saat", score: 2 },
+                    { text: "30 dakika", score: 3 },
+                    { text: "10 dakikadan az", score: 4 }
+                ]
+            },
+            {
+                question: "Teknolojisiz kaldığınızda nasıl hissedersiniz?",
+                options: [
+                    { text: "Rahat", score: 1 },
+                    { text: "Biraz huzursuz", score: 2 },
+                    { text: "Çok huzursuz", score: 3 },
+                    { text: "Kontrolü kaybetmiş gibi", score: 4 }
+                ]
+            },
+            {
+                question: "Teknoloji kullanımı iş/okul performansınızı etkiliyor mu?",
+                options: [
+                    { text: "Hiç etkilemiyor", score: 1 },
+                    { text: "Biraz etkiliyor", score: 2 },
+                    { text: "Orta düzeyde etkiliyor", score: 3 },
+                    { text: "Ciddi şekilde etkiliyor", score: 4 }
+                ]
+            },
+            {
+                question: "Uyku düzeniniz teknoloji kullanımından etkileniyor mu?",
+                options: [
+                    { text: "Hiç etkilenmiyor", score: 1 },
+                    { text: "Bazen etkileniyor", score: 2 },
+                    { text: "Sık sık etkileniyor", score: 3 },
+                    { text: "Her zaman etkileniyor", score: 4 }
+                ]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let totalScore = 0;
+
+        function startTest() {
+            currentQuestion = 0;
+            totalScore = 0;
+            document.getElementById('test-question').style.display = 'block';
+            document.getElementById('test-result').style.display = 'none';
+            showQuestion();
+        }
+
+        function showQuestion() {
+            if (currentQuestion >= testQuestions.length) {
+                showResult();
+                return;
+            }
+
+            const question = testQuestions[currentQuestion];
+            document.getElementById('question-text').textContent = question.question;
+            
+            const optionsContainer = document.getElementById('test-options');
+            optionsContainer.innerHTML = '';
+
+            question.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.className = 'option-btn';
+                button.innerHTML = `<span>${option.text}</span>`;
+                button.onclick = () => selectAnswer(option.score);
+                optionsContainer.appendChild(button);
+            });
+
+            // Update progress
+            const progress = ((currentQuestion + 1) / testQuestions.length) * 100;
+            document.getElementById('test-progress').style.width = progress + '%';
+        }
+
+        function selectAnswer(score) {
+            totalScore += score;
+            currentQuestion++;
+            showQuestion();
+        }
+
+        function showResult() {
+            document.getElementById('test-question').style.display = 'none';
+            document.getElementById('test-result').style.display = 'block';
+            document.getElementById('test-progress').style.width = '100%';
+
+            let resultTitle, resultDescription, recommendations;
+
+            if (totalScore <= 8) {
+                resultTitle = "Düşük Risk";
+                resultDescription = "Teknoloji kullanımınız genel olarak kontrollü görünüyor. Ancak yine de sağlıklı alışkanlıklar sürdürmeye devam edin.";
+                recommendations = `
+                    <ul style="text-align: left; max-width: 600px; margin: 2rem auto; color: var(--text-secondary);">
+                        <li style="margin-bottom: 1rem;">• Düzenli teknoloji molaları verin</li>
+                        <li style="margin-bottom: 1rem;">• Fiziksel aktivitelere zaman ayırın</li>
+                        <li style="margin-bottom: 1rem;">• Sosyal etkileşimleri önceliklendirin</li>
+                    </ul>
+                `;
+            } else if (totalScore <= 12) {
+                resultTitle = "Orta Risk";
+                resultDescription = "Teknoloji kullanımınızda bazı dikkat edilmesi gereken noktalar var. Kullanım sürelerinizi gözden geçirmeniz önerilir.";
+                recommendations = `
+                    <ul style="text-align: left; max-width: 600px; margin: 2rem auto; color: var(--text-secondary);">
+                        <li style="margin-bottom: 1rem;">• Günlük kullanım sürelerini belirleyin</li>
+                        <li style="margin-bottom: 1rem;">• Bildirimleri azaltın</li>
+                        <li style="margin-bottom: 1rem;">• Teknoloji detoksu günleri planlayın</li>
+                        <li style="margin-bottom: 1rem;">• Alternatif aktiviteler bulun</li>
+                    </ul>
+                `;
+            } else if (totalScore <= 16) {
+                resultTitle = "Yüksek Risk";
+                resultDescription = "Teknoloji kullanımınız endişe verici seviyede. Hemen önlem almanız ve kullanım alışkanlıklarınızı değiştirmeniz önerilir.";
+                recommendations = `
+                    <ul style="text-align: left; max-width: 600px; margin: 2rem auto; color: var(--text-secondary);">
+                        <li style="margin-bottom: 1rem;">• Profesyonel yardım almayı düşünün</li>
+                        <li style="margin-bottom: 1rem;">• Kademeli olarak kullanımı azaltın</li>
+                        <li style="margin-bottom: 1rem;">• Destek gruplarına katılın</li>
+                        <li style="margin-bottom: 1rem;">• Aile ve arkadaşlardan destek isteyin</li>
+                    </ul>
+                `;
+            } else {
+                resultTitle = "Çok Yüksek Risk";
+                resultDescription = "Teknoloji bağımlılığı riskiniz çok yüksek. Mutlaka profesyonel yardım almanız önerilir.";
+                recommendations = `
+                    <ul style="text-align: left; max-width: 600px; margin: 2rem auto; color: var(--text-secondary);">
+                        <li style="margin-bottom: 1rem;">• Derhal profesyonel yardım alın</li>
+                        <li style="margin-bottom: 1rem;">• Bağımlılık danışmanlığına başvurun</li>
+                        <li style="margin-bottom: 1rem;">• Tedavi programları hakkında bilgi alın</li>
+                        <li style="margin-bottom: 1rem;">• Aile desteği alın</li>
+                    </ul>
+                `;
+            }
+
+            document.getElementById('result-title').textContent = resultTitle;
+            document.getElementById('result-description').textContent = resultDescription;
+            document.getElementById('result-recommendations').innerHTML = recommendations;
+        }
+
+        function resetTest() {
+            startTest();
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        let lastScroll = 0;
+        const navbar = document.querySelector('.navbar');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                navbar.style.background = 'rgba(10, 14, 39, 0.95)';
+            } else {
+                navbar.style.background = 'rgba(10, 14, 39, 0.8)';
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // FAQ Toggle
+        function toggleFAQ(element) {
+            const faqItem = element.closest('.faq-item');
+            const isActive = faqItem.classList.contains('active');
+            
+            // Close all FAQ items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Open clicked item if it wasn't active
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        }
+
+        // Stories Slider
+        let currentStory = 0;
+        const stories = document.querySelectorAll('.story-card');
+        const totalStories = stories.length;
+
+        function goToStory(index) {
+            currentStory = index;
+            const container = document.getElementById('stories-container');
+            container.style.transform = `translateX(-${index * 100}%)`;
+            
+            // Update dots
+            document.querySelectorAll('#stories-nav .slider-dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextStory() {
+            currentStory = (currentStory + 1) % totalStories;
+            goToStory(currentStory);
+        }
+
+        function prevStory() {
+            currentStory = (currentStory - 1 + totalStories) % totalStories;
+            goToStory(currentStory);
+        }
+
+        // Auto-play stories slider
+        let storiesInterval = setInterval(nextStory, 5000);
+
+        // Pause on hover
+        const storiesSlider = document.querySelector('.stories-slider');
+        if (storiesSlider) {
+            storiesSlider.addEventListener('mouseenter', () => {
+                clearInterval(storiesInterval);
+            });
+            storiesSlider.addEventListener('mouseleave', () => {
+                storiesInterval = setInterval(nextStory, 5000);
+            });
+        }
+
+        // Hero Slider (if needed)
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        // Initialize
+        window.addEventListener('load', () => {
+            // Set initial active nav link
+            if (window.location.hash) {
+                const targetLink = document.querySelector(`a[href="${window.location.hash}"]`);
+                if (targetLink) {
+                    targetLink.classList.add('active');
+                }
+            } else {
+                document.querySelector('a[href="#anasayfa"]')?.classList.add('active');
+            }
+
+            // Initialize stories slider
+            if (stories.length > 0) {
+                goToStory(0);
+            }
+        });
+    </script>
+</body>
+</html>
